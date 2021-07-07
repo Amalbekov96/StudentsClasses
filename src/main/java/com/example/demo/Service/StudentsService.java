@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.Dto.StudentsDto;
 import com.example.demo.Model.Orders;
 import com.example.demo.Model.Students;
 
@@ -11,5 +12,7 @@ public interface StudentsService {
     List<Students> getAll();
     void delete(Long id);
     Students update(Students student);
+
+    StudentsDto findOrCreate(StudentsDto studentDto);
 
 }

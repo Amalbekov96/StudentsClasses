@@ -1,5 +1,8 @@
 package com.example.demo.Service.Impl;
 
+import com.example.demo.Dto.StudentsDto;
+import com.example.demo.Exception.StudentNotFoundException;
+import com.example.demo.Mapper.StudentsMapper;
 import com.example.demo.Model.Students;
 import com.example.demo.Repository.StudentsRepo;
 import com.example.demo.Service.StudentsService;
@@ -13,6 +16,9 @@ public class StudentsServiceImpl implements StudentsService {
 
     @Autowired
     private StudentsRepo studentsRepo;
+
+    @Autowired
+    private StudentsMapper studentsMapper;
 
     @Override
     public Students findStuden(Long id) {
@@ -37,5 +43,19 @@ public class StudentsServiceImpl implements StudentsService {
     @Override
     public Students update(Students student) {
         return studentsRepo.save(student);
+    }
+
+    @Override
+    public StudentsDto findOrCreate(StudentsDto studentDto) {
+
+        Students student = studentsMapper.toStudents(studentDto);
+
+        try{
+            studentsRepo.findByPhone(student.getPhone());
+        }catch (StudentNotFoundException e){
+            studentsRepo.save(student);
+        }
+
+        return studentsMapper.toStudentsDto(student);
     }
 }

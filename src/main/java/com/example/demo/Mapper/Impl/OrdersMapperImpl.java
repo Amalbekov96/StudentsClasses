@@ -2,9 +2,19 @@ package com.example.demo.Mapper.Impl;
 
 import com.example.demo.Dto.OrdersDto;
 import com.example.demo.Mapper.OrdersMapper;
+import com.example.demo.Mapper.StudentsMapper;
 import com.example.demo.Model.Orders;
+import com.example.demo.Model.Students;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class OrdersMapperImpl implements OrdersMapper {
+
+
+    @Autowired
+    private StudentsMapper studentsMapper;
+
     @Override
     public Orders toOrders(OrdersDto orderDto) {
         Orders order = new Orders();
@@ -16,7 +26,7 @@ public class OrdersMapperImpl implements OrdersMapper {
         order.setSchoolAddress(orderDto.getSchoolAddress());
         order.setSchoolName(orderDto.getSchoolName());
         order.setStatus(orderDto.getStatus());
-        order.setStudent(orderDto.getStudent());
+        order.setStudent(studentsMapper.toStudents(orderDto.getStudentDto()));
         return order;
     }
 
@@ -31,7 +41,7 @@ public class OrdersMapperImpl implements OrdersMapper {
         orderDto.setSchoolAddress(order.getSchoolAddress());
         orderDto.setSchoolName(order.getSchoolName());
         orderDto.setStatus(order.getStatus());
-        orderDto.setStudent(order.getStudent());
+        orderDto.setStudentDto(studentsMapper.toStudentsDto(order.getStudent()));
         return orderDto;
     }
 }

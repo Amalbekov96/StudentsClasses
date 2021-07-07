@@ -3,7 +3,9 @@ package com.example.demo.Mapper.Impl;
 import com.example.demo.Dto.StudentsDto;
 import com.example.demo.Mapper.StudentsMapper;
 import com.example.demo.Model.Students;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StudentsMapperImpl implements StudentsMapper {
 
 
@@ -13,6 +15,7 @@ public class StudentsMapperImpl implements StudentsMapper {
         student.setId(studentsDto.getId());
         student.setName(studentsDto.getName());
         student.setBirthDate(studentsDto.getBirthDate());
+        student.setPhone(studentsDto.getPhone());
         return student;
     }
 
@@ -22,6 +25,7 @@ public class StudentsMapperImpl implements StudentsMapper {
         studentDto.setId(students.getId());
         studentDto.setName(students.getName());
         studentDto.setBirthDate(students.getBirthDate());
+        studentDto.setPhone(students.getPhone());
         return studentDto;
     }
 }
