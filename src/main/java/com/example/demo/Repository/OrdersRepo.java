@@ -4,7 +4,9 @@ import com.example.demo.Model.Orders;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface OrdersRepo extends CrudRepository<Orders, Long> {
-    Orders findByStudentId(Long id);
+    List<Orders> findByStudentId(Long id);
 }

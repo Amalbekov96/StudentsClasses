@@ -2,9 +2,8 @@ package com.example.demo.Controller;
 
 import com.example.demo.Dto.OrdersDto;
 import com.example.demo.Mapper.OrdersMapper;
-import com.example.demo.Model.Orders;
 import com.example.demo.Service.OrdersService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,14 +19,19 @@ public class OrdersController {
     }
 
     @PostMapping("/sendRequest")
-    public String creat(@RequestBody OrdersDto orderDto){
+    public ResponseEntity<String> creat(@RequestBody OrdersDto orderDto){
         return ordersService.requestOrder(orderDto);
     }
 
     @PostMapping("processesRequest")
-    public String process(@RequestBody OrdersDto orderDto)
+    public ResponseEntity<String>  process(@RequestBody OrdersDto orderDto)
     {
         return ordersService.processRequest(orderDto);
     }
 
+    @PostMapping("decideOnRequest")
+    public ResponseEntity<String>  decide(@RequestBody OrdersDto orderDto)
+    {
+        return ordersService.decideOnRequest(orderDto);
+    }
 }
